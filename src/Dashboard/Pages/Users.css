@@ -1,0 +1,17 @@
+/* Styles for the order count and icon */
+.orders-count {
+  display: flex;
+  align-items: center;
+  gap: 8px;  /* Increased space between the icon and text */
+}
+
+.orders-icon {
+  color: var(--yellow, #ffcc00); /* Default yellow if --yellow is not defined */
+  font-size: 14px;  /* Slightly bigger icon */
+}
+
+.orders-count span {
+  font-size: 14px;  /* Making sure the order count text is clear */
+  font-weight: bold;
+  color: var(--text-color, #333);  /* Default text color if --text-color is not defined */
+}
