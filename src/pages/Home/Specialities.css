@@ -1,0 +1,135 @@
+.specialities-section {
+  background-color: #111;
+  color: white;
+  padding: 80px 20px; /* Adjust padding for equal space on top, bottom, left, and right */
+  padding-top: 15px;
+}
+
+.specialities-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.specialities-top-text {
+  font-size: 16px;
+  color: #aaa;
+  margin-bottom: 0px;
+  padding-bottom:0px;
+  letter-spacing: 1px;
+}
+
+.specialities-heading {
+  font-size: 38px;
+  color: #f5be32;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-top: 0px;
+}
+
+.specialities-subtext {
+  font-size: 16px;
+  color: #ccc;
+}
+
+.specialities-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 40px 0;
+}
+
+.filter-btn {
+  background: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  padding: 8px 18px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+  background-color: #f5be32;
+  color: #000;
+  border: none;
+}
+
+.filter-btn.active {
+  background-color: #f5be32;
+  color: #000;
+  border: none;
+}
+
+.specialities-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  align-items: center;
+}
+
+.speciality-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 0; /* Reduced gap */
+  gap: 40px; /* Adjusted spacing between image and text */
+  padding-top: 0px;
+}
+
+.speciality-item.reverse {
+  flex-direction: row-reverse;
+}
+
+.speciality-img {
+  width: 400px;
+  height: 300px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin: 0px; /* No extra space */
+}
+
+.speciality-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-width: 500px;
+  color: white;
+}
+
+.speciality-text h3 {
+  font-size: 28px;
+  margin-bottom: 0px;
+ 
+  color: #f5be32;
+}
+
+.speciality-text p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 18px;
+  color: #f5be32;
+  margin-bottom: 10px; /* thoda space price aur button ke beech */
+}
+
+.order-bttn {
+  margin: 0;
+  padding: 10px 20px;
+  font-size: 15px;
+  background-color: #f5be32;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 120px;
+}
+
+.order-btn:hover {
+  background-color: #f5be32;
+}

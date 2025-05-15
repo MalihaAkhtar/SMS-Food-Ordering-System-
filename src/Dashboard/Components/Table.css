@@ -1,0 +1,184 @@
+/* Table Container Styling */
+.table-container {
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid #444;
+  background-color: #2e2e2e; /* Dark theme background */
+  margin: 20px 0;
+  padding: 10px;
+}
+
+/* Table Styling */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #333; /* Dark background for the table */
+  color: #fff; /* White text for dark mode */
+}
+
+/* Header Styling */
+.data-table th,
+.data-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #444;
+}
+
+/* Header Background */
+.data-table th {
+  background-color: #444;
+  font-weight: 600;
+  color: #ccc; /* Lighter text for headers */
+}
+
+/* Row Hover Effects */
+.data-table tr:hover {
+  background-color: #555; /* Slight hover effect on rows */
+}
+
+/* Actions Column Styling */
+.actions-column {
+  width: 80px;
+  text-align: right;
+}
+
+/* Actions Cell Styling */
+.actions-cell {
+  text-align: right;
+  position: relative;
+}
+
+/* Button Styling for Actions */
+.actions-btn {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Dots Icon for Actions */
+.actions-dots {
+  display: block;
+  width: 5px;
+  height: 5px;
+  background-color: #ccc;
+  border-radius: 50%;
+  margin: auto;
+  position: relative;
+}
+
+.actions-dots::before,
+.actions-dots::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background-color: #ccc;
+  border-radius: 50%;
+  left: 0;
+}
+
+.actions-dots::before {
+  top: -7px;
+}
+
+.actions-dots::after {
+  top: 7px;
+}
+
+/* Dropdown Content Styling */
+.actions-dropdown {
+  position: absolute;
+  right: 0;
+  top: 40px;
+  background-color: #444; /* Dark background for dropdown */
+  border: 1px solid #555;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  min-width: 180px;
+  display: none;
+  flex-direction: column;
+}
+
+/* Show dropdown when active */
+.actions-dropdown.show {
+  display: flex;
+}
+
+/* Dropdown Item Styling */
+.dropdown-item {
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #ccc; /* Light text for items */
+}
+
+/* Hover effect for items */
+.dropdown-item:hover {
+  background-color: #555;
+}
+
+/* Danger item styling */
+.dropdown-item.danger {
+  color: #e74c3c; /* Red color for danger actions */
+}
+
+/* Label inside dropdown */
+.dropdown-label {
+  font-size: 12px;
+  color: #888;
+  padding: 8px 16px;
+}
+
+/* Divider inside dropdown */
+.dropdown-divider {
+  height: 1px;
+  background-color: #555;
+  margin: 4px 0;
+}
+
+/* Icon for actions */
+.action-icon {
+  margin-right: 8px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Responsiveness for small screens */
+@media (max-width: 768px) {
+  .table-container {
+    padding: 10px;
+    margin: 0;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 8px;
+  }
+
+  .actions-btn {
+    width: 28px;
+    height: 28px;
+  }
+
+  .actions-dots {
+    width: 4px;
+    height: 4px;
+  }
+
+  .actions-dots::before,
+  .actions-dots::after {
+    width: 4px;
+    height: 4px;
+  }
+
+  .actions-dropdown {
+    min-width: 150px;
+  }
+}
