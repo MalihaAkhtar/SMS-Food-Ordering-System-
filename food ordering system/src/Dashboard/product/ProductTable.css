@@ -1,0 +1,123 @@
+.product-table-wrapper {
+  overflow-x: auto;
+  background-color: #0d0d0d;
+  border-radius: 8px;
+  padding: 0; /* Remove extra padding */
+  border: 1px solid #2a2a2c;
+}
+
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+  font-size: 14px;
+  border-left:1px solid #2a2a2c;
+  border-right:1px solid #2a2a2c ;
+}
+
+.product-table thead {
+  background-color: #374151;
+  color: #d1d5db;
+  
+}
+
+.product-table th,
+.product-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #2a2a2c;
+ 
+}
+
+.product-row:hover {
+  background-color: #2d3748;
+}
+
+.product-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.status {
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 5px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.status.available {
+   background-color: #22c55e33;
+  color: #22c55e;
+}
+
+.status.unavailable {
+   background-color: #ef444433;
+  color: #ef4444;
+}
+
+.action-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+  user-select: none;
+  outline: none;
+}
+
+.action-dropdown {
+  position: absolute;
+  right: 0;
+  top: 28px;
+  background-color: #1f1f1f;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 100px;
+  z-index: 10;
+}
+
+.action-dropdown button {
+  background: none;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.action-dropdown button:hover {
+  background-color: #333;
+}
+
+.filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+  align-items: center;
+}
+
+.filter-input,
+.filter-select {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #4b5563;
+  background-color: #0d0d0d;
+  color: #f9fafb;
+  font-size: 14px;
+  flex: 1;
+  min-width: 200px;
+}
+
+.filter-select {
+  max-width: 180px;
+}

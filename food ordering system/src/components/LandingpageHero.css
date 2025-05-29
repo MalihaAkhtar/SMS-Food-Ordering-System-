@@ -1,0 +1,96 @@
+.hero {
+  background-image: url('../assets/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 80px 20px;
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh; /* height adjust karne ke liye */
+  box-sizing: border-box;
+}
+
+.hero-text {
+  max-width: 800px;
+  width: 100%;
+  padding: 0 20px; /* left-right inner padding */
+}
+
+.hero-text h3 {
+  font-size: 18px;
+  letter-spacing: 1px;
+  color: #d3af5f;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+.hero-text h1 {
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 1.5;
+  padding-top: 0px;
+  margin-top: 0px;
+  margin-bottom: 8px;
+}
+
+.hero-text span {
+  color: #d3af5f;
+}
+
+.hero-text p {
+  max-width: 600px;
+  margin: 10px auto;
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: 400;
+}
+.search-bar1 {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: stretch; /* 👈 this makes all children match height */
+  width: 100%;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-bar1 input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 3px 0 0 3px;
+  font-size: 16px;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.search-bar1 button {
+  padding: 9px 20px; /* 👈 vertical padding removed to match input height */
+  background-color: #ffc107;
+  border: none;
+  border-radius: 0 3px 3px 0;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  height: 100%; /* 👈 ensures it matches the input height */
+}
+
+.shop-results {
+  margin-top: 20px;
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+}
+
+.shop-results ul {
+  list-style: none;
+  padding: 0;
+}
+
+.shop-results li {
+  margin-bottom: 10px;
+}

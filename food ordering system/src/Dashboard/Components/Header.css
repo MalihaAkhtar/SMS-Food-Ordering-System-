@@ -1,0 +1,145 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid #374151;
+  background-color: #000;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  position: relative;
+  z-index: 50;
+}
+
+.header h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-left: 260px;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Container for each icon for absolute positioning */
+.icon-container {
+  position: relative;
+}
+
+/* Notification icon */
+.notification,
+.user {
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.notification {
+  color: #fbbf24;
+  background-color: transparent;
+}
+
+/* Badge on bell */
+.notification-badge {
+  position: absolute;
+  top: -0.30px;
+  right: -0.30px;
+  background-color: #ef4444;
+  color: white;
+  width: 16px;
+  height: 16px;
+  font-size: 0.65rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+/* User icon background */
+.user {
+  background-color: #1f2937;
+  border-radius: 9999px;
+}
+
+/* Dropdowns */
+.dropdown {
+  position: absolute;
+  top: 45px; /* just below the icon */
+  right: 0;
+  background-color: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  width: 240px;
+  z-index: 1000;
+}
+
+/* Notification dropdown list */
+.notification-dropdown {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.notification-item {
+  padding: 10px 12px;
+  border-bottom: 1px solid #374151;
+  color: #f9fafb;
+  font-size: 0.9rem;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.notification-item strong {
+  color: #facc15;
+}
+
+.notification-item:hover {
+  background-color: #374151;
+}
+
+/* Profile dropdown */
+.profile-dropdown {
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+}
+
+.profile-option {
+  padding: 12px 16px;
+  border-bottom: 1px solid #374151;
+  color: #f9fafb;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease;
+}
+
+.profile-option:last-child {
+  border-bottom: none;
+}
+
+.profile-option:hover {
+  background-color: #374151;
+}
+.header-profile-image {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}
+.header-logo-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}

@@ -1,0 +1,60 @@
+/* src/Dashboard/Profile/Profile.css */
+
+.dashboard-profile {
+  display: flex;
+  flex-direction: row;
+  background-color: #1f2937; /* gray-900 */
+  color: #fff;
+  min-height: calc(100vh - 4rem); /* 4rem = 64px header */
+}
+
+.profile-sidebar {
+  width: 260px;
+  background-color: #111827; /* darker sidebar */
+  padding: 20px;
+  border-right: 1px solid #374151; /* subtle border */
+}
+
+.profile-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-sidebar li {
+  margin-bottom: 16px;
+}
+
+.profile-sidebar a {
+  text-decoration: none;
+  color: #9ca3af; /* gray-400 */
+  font-size: 16px;
+  padding: 10px 15px;
+  display: block;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.profile-sidebar a:hover,
+.profile-sidebar a.active {
+  background-color: #2563eb; /* blue-600 */
+  color: white;
+}
+
+.profile-content {
+  flex: 1;
+  padding: 20px;
+  background-color: #1f2937;
+}
+
+@media (max-width: 768px) {
+  .dashboard-profile {
+    flex-direction: column;
+  }
+
+  .profile-sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #374151;
+  }
+}

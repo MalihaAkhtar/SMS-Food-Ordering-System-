@@ -1,0 +1,95 @@
+/* Sidebar.css */
+
+/* Sidebar.css */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.7);
+  overflow: hidden; /* ✅ Force no scroll on sidebar */
+  z-index: 100;
+}
+
+.sidebar h2 {
+  margin-bottom: 2rem;
+  flex-shrink: 0;
+  color:#ecac0a;
+  margin-top: 0px;
+}
+
+.sidebar ul {
+  flex-grow: 1;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  overflow-y: auto; /* ✅ optional: only if many menu items */
+  max-height: calc(100vh - 200px); /* ✅ adjust based on logo + footer height */
+
+}
+
+/* Optional — if you don’t want scroll ever */
+.sidebar ul {
+  overflow-y: hidden; 
+}
+
+.sidebar footer {
+  margin-top: 2rem;
+  flex-shrink: 0;
+  text-align: center;
+  color:#919191;
+
+}
+
+/* WebKit scrollbar */
+.sidebar ul::-webkit-scrollbar {
+  width: 8px;
+}
+.sidebar ul::-webkit-scrollbar-thumb {
+  background-color: #444;
+  border-radius: 4px;
+}
+
+/* Firefox scrollbar */
+.sidebar ul {
+  scrollbar-width: thin;
+  scrollbar-color: #444 transparent;
+}
+
+.sidebar ul li {
+  margin-bottom: 0.75rem;
+}
+
+.sidebar ul li a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #d1d5db;
+  font-size: 1.1rem;
+  cursor: pointer;               /* pointer on all links */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+  background-color: #ca8a04;
+  color: #000;
+}
+
+.sidebar ul li a.active {
+  background-color: #eab308;
+  color: #000;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(234,179,8,0.7);
+}
+
+
