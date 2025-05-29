@@ -1,0 +1,120 @@
+/* Define root-level variables for colors, radius, etc. */
+:root {
+  --dark-gray: #333;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --yellow: #FFB800;
+  --light-gray: #ccc;
+  --text-gray: #777;
+  --white: #fff;
+}
+
+.feedback-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.feedback-card {
+  background-color: var(--dark-gray);
+  border-radius: var(--border-radius);
+  padding: 16px;
+  box-shadow: var(--box-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feedback-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.feedback-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.feedback-customer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.feedback-customer h3 {
+  font-weight: 500;
+  margin: 0;
+  color: var(--white);
+}
+
+.feedback-date {
+  font-size: 14px;
+  color: var(--text-gray);
+  margin: 0;
+}
+
+.feedback-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.star-rating {
+  display: flex;
+  gap: 2px;
+}
+
+.star-filled {
+  color: var(--yellow);
+}
+
+.star-empty {
+  color: var(--light-gray);
+}
+
+.feedback-content {
+  color: var(--white);
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.feedback-footer {
+  display: flex;
+  gap: 12px;
+}
+
+.feedback-footer button {
+  padding: 8px 16px;
+  background-color: var(--light-gray);
+  border: none;
+  border-radius: var(--border-radius);
+  color: var(--dark-gray);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.feedback-footer button:hover {
+  background-color: var(--yellow);
+  color: var(--white);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .feedback-list {
+    flex-direction: column;
+  }
+
+  .feedback-card {
+    padding: 12px;
+  }
+
+  .feedback-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .feedback-actions {
+    justify-content: flex-start;
+  }
+}

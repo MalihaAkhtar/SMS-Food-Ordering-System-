@@ -1,0 +1,101 @@
+.story-section {
+  background-color: #111;
+  color: white;
+  padding: 60px 40px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.story-top {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.story-label {
+  font-size: 14px;
+  color: #cfcfcf;
+  margin-bottom: 8px;
+  font-family: cursive;
+}
+
+.story-heading {
+  font-size: 36px;
+  color: #f5be32;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.story-subheading {
+  font-size: 16px;
+  color: #ccc;
+}
+
+.story-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.story-images {
+  display: flex;
+}
+
+.left-images {
+  display: flex;
+}
+
+.left-images img {
+  width: 220px;
+  height: 330px;
+  object-fit: cover;
+  border-radius: 0px 0 0 0px;
+}
+
+.right-image-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.right-image-group img {
+  width: 200px;
+  height: 165px;
+  object-fit: cover;
+}
+
+.story2 {
+  border-radius: 0 10px 0 0;
+}
+
+.story3 {
+  border-radius: 0 0 10px 0;
+}
+
+.story-text {
+  flex: 1;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.story-text p {
+  font-size: 15px;
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+.story-btn {
+  width: fit-content;
+  background-color: transparent;
+  border: 1px solid #f5be32;
+  color: #f5be32;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.story-btn:hover {
+  background-color: #f5be32;
+  color: #000;
+}

@@ -1,0 +1,85 @@
+/* Stat Card Styling */
+.stat-card {
+  background-color: var(--dark-gray, #2e2e2e);
+  border-radius: 10px; /* Added some extra roundness for a modern look */
+  padding: 16px;
+  box-shadow: var(--box-shadow, 0 4px 16px rgba(0, 0, 0, 0.2));
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+}
+
+/* Hover effect to lift card */
+.stat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--box-shadow, 0 6px 24px rgba(0, 0, 0, 0.3));
+}
+
+/* Header style for title and icon alignment */
+.stat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+/* Title styling */
+.stat-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-gray, #bbb);
+  text-transform: capitalize;
+}
+
+/* Icon styling */
+.stat-icon {
+  color: var(--yellow, #f1c40f);
+  font-size: 24px;
+}
+
+/* Value styling */
+.stat-value {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--white, #fff);
+  margin-bottom: 8px;
+}
+
+/* Change text styling */
+.stat-change {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-gray, #aaa);
+}
+
+/* Positive change style (green color) */
+.stat-change.positive {
+  color: #4caf50;
+}
+
+/* Negative change style (red color) */
+.stat-change.negative {
+  color: #f44336;
+}
+
+/* Optional: For smaller screens */
+@media (max-width: 600px) {
+  .stat-card {
+    padding: 12px;
+    gap: 6px;
+  }
+
+  .stat-title {
+    font-size: 14px;
+  }
+
+  .stat-value {
+    font-size: 24px;
+  }
+
+  .stat-change {
+    font-size: 12px;
+  }
+}

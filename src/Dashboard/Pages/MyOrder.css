@@ -1,0 +1,22 @@
+.badge-icon {
+  margin-right: 4px;
+  font-size: 1rem; /* Using rem for scalability */
+}
+
+.flex-responsive {
+  display: flex;
+  gap: 16px; /* Added gap for spacing between flex items */
+}
+
+@media (max-width: 768px) {
+  .flex-responsive {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .search-input,
+  .select {
+    width: 100%;
+    margin-bottom: 12px; /* Added spacing between input and select */
+  }
+}

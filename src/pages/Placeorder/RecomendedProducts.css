@@ -1,0 +1,75 @@
+.recommended-section {
+  background-color: black;
+  color: white;
+  padding: 40px 20px;
+}
+
+.recommended-heading {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.recommended-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.recommended-card {
+  background-color: #1A1A1A;
+  border: 1px solid #3a3a3a;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.recommended-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.recommended-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.recommended-title {
+  color: #F6BE4F;
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.recommended-price {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.recommended-stars {
+  color: #FFD700;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.recommended-btn {
+  margin-top: auto;
+  background-color: #F6BE4F;
+  color: black;
+  padding: 8px 20px;
+  font-size: 12px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  align-self: flex-start;
+}
+
+.recommended-btn:hover {
+  background-color: #e0a935;
+}

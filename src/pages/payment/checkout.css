@@ -1,0 +1,269 @@
+body {
+  margin: 0;
+  background-color: #000;
+  font-family: 'Segoe UI', sans-serif;
+  color: #fff;
+}
+
+.checkout-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 30px;
+}
+
+@media (min-width: 768px) {
+  .checkout-container {
+    flex-direction: row;
+    padding: 50px 80px;
+  }
+}
+
+.checkout-left {
+  flex: 2;
+}
+
+.checkout-right {
+  flex: 1;
+  background-color: #fff;
+  color: #000;
+  padding: 30px;
+  border-radius: 12px;
+  max-height: 1150px;
+}
+
+.logo {
+  height: 60px;
+  margin-bottom: 30px;
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  padding-right: 10px;
+}
+
+.section-desc {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-bottom: 15px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  background-color: #fff;
+  color: #000;
+  box-sizing: border-box;
+}
+
+input::placeholder {
+  color: #888;
+}
+
+.input-row {
+  display: flex;
+  gap: 10px;
+}
+
+.input-row input {
+  flex: 1;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #fbbf24;
+  cursor: pointer;
+}
+
+.shipping-box {
+  background-color: #fff;
+  color: #000;
+  padding: 14px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.pay-button {
+  background-color: #fbbf24;
+  color: #000;
+  padding: 14px;
+  border-radius: 6px;
+  border: none;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+
+.pay-button:hover {
+  background-color: #facc15;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.order-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.item-details h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.item-details p {
+  margin: 2px 0;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.item-price {
+  font-weight: bold;
+  margin-left: auto;
+}
+
+.order-totals {
+  border-top: 1px solid #ccc;
+  margin-top: 20px;
+  padding-top: 15px;
+}
+
+.order-totals div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.total-final {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.credit-card-box {
+  background-color: #fff;
+  color: #000;
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 30px;
+}
+
+.credit-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.credit-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.input-with-icon {
+  position: relative;
+  width: 100%;
+  
+}
+.input-with-icon
+.input-icon{
+  margin-left: 270px;
+  padding-bottom: 30px;
+}
+.input-with-icon input {
+  width: 100%;
+  padding: 12px 40px 12px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  height: 45px;
+  box-sizing: border-box;
+}
+
+.input-icon,
+.icon-lock {
+  position: absolute;
+  right: 12px;
+  top: 40%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #888;
+  padding-bottom: 5px;
+}
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  color: #fff;
+  line-height: 1;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #fbbf24;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+  appearance: none;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  position: relative;
+}
+
+.checkbox-label input[type="checkbox"]:checked::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 4px;
+  height: 9px;
+  border: solid #fbbf24;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Specific style for the black-text checkbox label */
+.checkbox-label label.black-text {
+  color: #000;  /* This makes the text black */
+
+}
+.credit-icon {
+  width: 28px;
+  height: 28px;
+}
+

@@ -1,0 +1,116 @@
+.reviews-section {
+    padding: 30px;
+    background-color: #000000;
+    border-radius: 10px;
+  }
+  
+  .ratings-overview {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+  
+  .left-panel {
+    width: 20%;
+    text-align: center;
+  }
+  
+  .avg-rating {
+    font-size: 48px;
+    font-weight: bold;
+    color: #ffffff;
+  }
+  
+  .stars {
+    color: #ffcc00;
+    font-size: 20px;
+  }
+  
+  .total-reviews {
+    margin-top: 5px;
+    color: gray;
+  }
+  
+  .right-panel {
+    flex: 3;
+    background-color: #000000;
+
+  }
+  
+  .bar-line {
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+    width:300px;
+    margin-left: 0px;
+  }
+  
+  .bar-line span {
+    width: 10px;
+    font-weight: 500;
+  }
+  
+  .bar-bg {
+    background: #e0e0e0;
+    border-radius: 10px;
+    flex: 1;
+    height: 10px;
+    margin-left: 0px;
+    overflow: hidden;
+  }
+  
+  .bar-fill {
+    background-color: #ffcc00; /* your theme color */
+    height: 100%;
+    border-radius: 10px;
+  }
+  
+  
+  .review-box {
+    margin-bottom: 20px;
+  }
+  
+  .review-box h4 {
+    margin: 0;
+    font-weight: 600;
+  }
+  
+  .review-box small {
+    color: rgb(19, 17, 17);
+  }
+  
+  .review-box p {
+    margin: 10px 0;
+  }
+  
+ 
+  
+  .btn {
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .yellow-btn {
+    background-color: #ffcc00;
+    color: #fff;
+    width: 30%;
+  }
+  
+  .yellow-btn:hover {
+    background-color: #e6b800;
+  }
+  
+  .small-btn {
+    background: #f0f0f0;
+    color: #333;
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+  
+  .fulll-width {
+    width: 15%;
+    margin-top: 10px;
+  }
+  
