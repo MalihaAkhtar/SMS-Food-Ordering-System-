@@ -1,0 +1,191 @@
+/* Reset & Base */
+body{
+  background-color: black;
+}
+* {
+  box-sizing: border-box;
+}
+
+body, html, .App {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fff;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+  margin: 40px 0px;
+  width: 100%;
+  overflow: hidden;
+  background-color: #fff;
+  justify-content: space-between; /* Space out the left and right panels */
+  align-items: center; /* Vertically center the content */
+}
+
+/* Left Panel */
+.left-panel {
+  flex: 1;
+  position: relative;
+}
+
+.left-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.85); /* Slight dark without blurring */
+}
+
+/* Overlay content */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3); /* Slightly lighter than before */
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.overlay h2 {
+  font-size: 36px;
+  margin-bottom: 2px;
+}
+
+.overlay p {
+  font-size: 18px;
+  margin-bottom: 25px;
+  max-width: 400px;
+}
+
+.overlay .signin {
+  background-color: #f4b400;
+  border: none;
+  color: white;
+  padding: 14px 50px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.overlay .signin:hover {
+  background-color: #dca200;
+}
+
+/* Right Panel */
+.right-panel1 {
+  flex: 1;
+  padding: 40px 60px; /* Adjust padding to fit better */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+}
+
+/* Center Form Box */
+.form-box {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Title */
+.form-header {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-header h1 {
+  font-size: 30px;
+  color: #f4b400;
+}
+
+
+
+/* Social Login Buttons */
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.social-buttons button {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  background-color: white;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* Input Fields */
+.input-wrapper {
+  margin-bottom: 15px;
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-container input {
+  width: 100%;
+  padding: 12px 40px 12px 40px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  background-color: #f6fafa;
+  outline: none;
+}
+
+/* Icons */
+.input-icon {
+  position: absolute;
+  left: 12px;
+  width: 18px;
+  height: 18px;
+}
+
+.toggle-icon {
+  position: absolute;
+  right: 12px;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* Submit Button */
+.right-panel1 .signin {
+  background-color: #f4b400;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  max-width: 170px;
+  transition: background 0.3s;
+}
+
+.right-panel1 .signin:hover {
+  background-color: #dca200;
+}

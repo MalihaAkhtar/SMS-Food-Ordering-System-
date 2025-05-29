@@ -1,0 +1,75 @@
+/* Layout container setup */
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #090d14; /* Dark like sidebar */
+  color: white;
+  
+}
+
+/* Main wrapper holds header + content */
+.main-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  transition: margin-left 0.3s ease;
+  margin-left: 400px;
+  width: 100px;
+}
+
+/* Top header bar */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background-color: #1f2937; /* Dark header */
+  border-bottom: 1px solid #374151;
+}
+
+/* Hamburger toggle */
+.toggle-btn {
+  font-size: 20px;
+  color: white;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* App title */
+.app-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* Main content area */
+.main-content {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+/* Adjust layout for opened sidebar (if fixed) */
+.sidebar-open .main-wrapper {
+  margin-left: 250px; /* match sidebar width */
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar-open .main-wrapper {
+    margin-left: 0;
+  }
+
+  .topbar {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .app-title {
+    font-size: 18px;
+  }
+}

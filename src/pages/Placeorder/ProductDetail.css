@@ -1,0 +1,200 @@
+/* General styling for product details section */
+.product-details {
+  display: flex;
+  padding: 20px;
+  justify-content: space-between;
+}
+  
+  .left {
+    width: 50%;
+  }
+  
+  .main-image {
+    width: 100%;
+    max-width: 400px;
+    max-height: 350px;
+  }
+  
+  .thumbnail-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .thumbnail {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    transition: border 0.3s ease;
+  }
+  
+  .thumbnail.active {
+    border: 2px solid #ff9900;
+  }
+  
+  .left {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-right: 20px;
+    box-sizing: border-box;
+  }
+  
+  .delivery-section {
+    margin-top: 10px;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  
+  .delivery-info {
+    font-weight: 600;
+    color: #000;
+    margin: 0;
+  }
+  
+  .divider {
+    width: 36%;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 5px 0;
+  }
+  
+  .share-btn {
+    background-color: #ffcc00;
+    border: none;
+    padding: 6px 14px;
+    color: #000;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+  }
+  
+  
+  .right {
+    width: 100%;
+    max-width: 600px; /* optional */
+    padding: 20px;
+  }
+  
+  
+  .right h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .meta {
+    margin-top: 20px;
+  }
+  
+  meta p {
+    margin: 4px 0;
+  }
+  
+  .quantity-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  .qty-controls {
+    display: flex;
+    align-items: center;
+    border: 2px solid #ffcc00;
+    border-radius: 6px;
+    overflow: hidden;
+    height: 45px;
+    width: 140px;
+    background-color: white;
+    color:#0000;
+  }
+  
+  /* Buttons */
+  .qty-btn {
+    width: 40px;
+    height: 100%;
+    background-color: white;       /* White background */
+    color: black;                  /* Black + and - symbols */
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 0;
+  }
+  
+  /* Optional: slight hover effect */
+  .qty-btn:hover {
+    background-color: #f2f2f2;
+  }
+  
+  
+  /* Number with divider lines */
+  .qty-number-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 100%;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+  }
+  
+  .qty-number {
+    font-size: 18px;
+    color: #333;
+  }
+  
+  
+/* Base Button Styling */
+/* Base Button Style */
+.btn {
+  height: 50px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+ 
+}
+
+/* Yellow Button Theme */
+.yellow-btn {
+  background-color: #ffcc00;
+  color: white;
+}
+
+.yellow-btn:hover {
+  background-color: #e6b800;
+}
+
+/* Buttons Wrapper */
+.buttons-container {
+  width: 70%;
+  margin: 20px 0 0 0; /* center aligned */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Inline Buttons Row */
+.inline-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+/* Each Inline Button: 50% of 70% container */
+.inline-buttons .btn {
+  width: 50%;
+}
+
+/* Full Width Buy Now Button */
+.full-width {
+  width: 100% !important;
+}
