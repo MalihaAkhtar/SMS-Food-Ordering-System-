@@ -1,11 +1,28 @@
 const express = require('express');
 const cors = require('cors');
-const mysql = require('mysql2');
 const bodyParser = require('body-parser');
+const mysql = require('mysql2');
+const path = require('path');
+const multer = require('multer');
 
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, 'uploads')); // Make sure this folder exists
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + path.extname(file.originalname)); // e.g. 1623741234-123.png
+  }
+});
+
+const upload = multer({ storage });
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+
+// 📂 Static folder for serving images
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // MySQL connection
 const db = mysql.createConnection({
@@ -16,305 +33,222 @@ const db = mysql.createConnection({
 });
 
 db.connect(err => {
-  if (err) throw err;
-  console.log('✅ Connected to MySQL');
+  if (err) {
+    console.error('❌ Database connection failed:', err);
+    return;
+  }
+  console.log('✅ Connected to MySQL database!');
 });
 
-// --- AUTH ROUTES ---
+/* ------------------- ORDERS ------------------- */
 
-app.post('/signup', (req, res) => {
-  const { name, email, password } = req.body;
-  const uid = 'manual_' + Date.now();
-  const provider = 'email';
-  const sql = 'INSERT INTO users (name, email, password, uid, provider) VALUES (?, ?, ?, ?, ?)';
-
-  db.query(sql, [name, email, password, uid, provider], (err) => {
-    if (err) return res.status(500).json({ message: 'Database error' });
-    res.json({ message: '✅ User registered successfully' });
-  });
-});
-
-app.post('/signin', (req, res) => {
-  const { email, password } = req.body;
-  const sql = 'SELECT * FROM users WHERE email = ? AND password = ?';
-
-  db.query(sql, [email, password], (err, results) => {
-    if (err) return res.status(500).json({ message: 'Database error' });
-    if (results.length > 0) {
-      res.json({ message: '✅ Sign in successful', user: results[0] });
-    } else {
-      res.status(401).json({ message: '❌ Invalid credentials' });
-    }
-  });
-});
-
-app.post('/api/auth/google', (req, res) => {
-  const { name, email, uid, photo, provider } = req.body;
-  const sql = 'INSERT IGNORE INTO users (name, email, uid, photo, provider) VALUES (?, ?, ?, ?, ?)';
-
-  db.query(sql, [name, email, uid, photo, provider], (err) => {
-    if (err) return res.status(500).json({ message: 'Database error' });
-    res.json({ message: '✅ Google login success' });
-  });
-});
-
-// --- SHOP / MENU ROUTES ---
-
-app.get("/api/shops", (req, res) => {
-  const area = req.query.area;
-  const query = "SELECT * FROM shops WHERE area LIKE ?";
-  db.query(query, [`%${area}%`], (err, results) => {
-    if (err) return res.status(500).send(err);
-    res.json(results);
-  });
-});
-
-app.get('/api/foods', (req, res) => {
-  const search = req.query.query;
-  if (!search) return res.status(400).json({ error: "Search query is required" });
-
-  const searchTerm = `%${search.toLowerCase()}%`;
+// GET all orders
+app.get("/api/admin/orders", (req, res) => {
   const sql = `
-    SELECT * FROM foods 
-    WHERE LOWER(name) LIKE ? OR 
-          LOWER(description) LIKE ? OR 
-          LOWER(category) LIKE ?
+    SELECT 
+      id, 
+      user_name AS customer, 
+      user_email AS email,
+      country,
+      address,
+      product_title AS product,
+      product_price AS price,
+      product_quantity AS quantity,
+      product_description AS description,
+      product_image AS image,
+      payment_method,
+      tracking_status AS status,
+      created_at AS date
+    FROM orders
+    ORDER BY id DESC
   `;
-  db.query(sql, [searchTerm, searchTerm, searchTerm], (err, result) => {
-    if (err) return res.status(500).json({ error: "Database error" });
-    res.json(result);
-  });
-});
 
-// --- CART ROUTES ---
-
-//--- CART ROUTES ---
-
-// Get all cart items
-app.get('/api/cart', (req, res) => {
-  const query = 'SELECT * FROM cart';
-  db.query(query, (err, results) => {
+  db.query(sql, (err, results) => {
     if (err) {
-      console.error('Error fetching cart items:', err);
-      return res.status(500).json({ error: 'Database error' });
+      console.error("MySQL Error:", err);
+      return res.status(500).json({ error: err.message });
     }
     res.json(results);
   });
 });
 
-// Add new item to cart
-app.post('/api/cart', (req, res) => {
-  let { name, description, longDescription, price, quantity, image } = req.body;
-
-  if (!name || price == null || quantity == null) {
-    return res.status(400).json({ error: 'Required fields missing: name, price, quantity' });
-  }
-
-  if (typeof price === 'string') {
-    price = price.replace(/[^0-9.]/g, '');
-  }
-
-  price = parseFloat(price);
-
-  if (isNaN(price)) {
-    return res.status(400).json({ error: 'Price must be a valid number' });
-  }
+// UPDATE order by id
+app.put('/api/admin/orders/:id', (req, res) => {
+  const orderId = req.params.id;
+  const { product_quantity, product_price, status } = req.body;
 
   const query = `
-    INSERT INTO cart (name, description, longDescription, price, quantity, image)
-    VALUES (?, ?, ?, ?, ?, ?)
-  `;
-
-  db.query(query, [name, description || '', longDescription || '', price, quantity, image || ''], (err, result) => {
-    if (err) {
-      console.error('Error inserting cart item:', err.sqlMessage || err.message || err);
-      return res.status(500).json({ error: 'Failed to save cart item' });
-    }
-
-    res.status(201).json({ id: result.insertId, ...req.body });
-  });
-});
-
-// Update cart item by ID
-app.put('/api/cart/:id', (req, res) => {
-  const { name, description, longDescription, price, quantity, image } = req.body;
-  const id = req.params.id;
-
-  if (!name || price == null || quantity == null) {
-    return res.status(400).json({ error: 'Required fields missing: name, price, quantity' });
-  }
-
-  const query = `
-    UPDATE cart SET
-      name = ?, 
-      description = ?, 
-      longDescription = ?, 
-      price = ?, 
-      quantity = ?, 
-      image = ?
+    UPDATE orders
+    SET product_quantity = ?, product_price = ?, tracking_status = ?
     WHERE id = ?
   `;
 
-  db.query(query, [name, description || '', longDescription || '', price, quantity, image || '', id], (err, result) => {
+  db.query(query, [product_quantity, product_price, status, orderId], (err) => {
     if (err) {
-      console.error('Error updating cart item:', err);
-      return res.status(500).json({ error: 'Failed to update cart item' });
+      console.error('❌ Error updating order:', err);
+      return res.status(500).json({ message: 'Update failed' });
+    }
+    res.json({ message: 'Order updated successfully' });
+  });
+});
+
+// DELETE order by id
+app.delete('/api/admin/orders/:id', (req, res) => {
+  const orderId = req.params.id;
+  const sql = `DELETE FROM orders WHERE id = ?`;
+
+  db.query(sql, [orderId], (err, result) => {
+    if (err) {
+      console.error('❌ Error deleting order:', err);
+      return res.status(500).json({ message: 'Delete failed' });
     }
     if (result.affectedRows === 0) {
-      return res.status(404).json({ error: 'Cart item not found' });
+      return res.status(404).json({ message: 'Order not found' });
     }
-    res.json({ message: 'Cart item updated successfully' });
+    res.json({ message: 'Order deleted successfully' });
   });
 });
 
-// Delete cart item by ID
-app.delete('/api/cart/:id', (req, res) => {
-  const id = req.params.id;
+/* ----------- PRODUCTS ----------- */
 
-  const query = 'DELETE FROM cart WHERE id = ?';
-  db.query(query, [id], (err, result) => {
-    if (err) {
-      console.error('Error deleting cart item:', err);
-      return res.status(500).json({ error: 'Failed to delete cart item' });
-    }
-    if (result.affectedRows === 0) {
-      return res.status(404).json({ error: 'Cart item not found' });
-    }
-    res.json({ message: 'Cart item deleted successfully' });
-  });
-});
-// --- ORDER ROUTES ---
-app.get('/api/order-status/:orderId', (req, res) => {
-  const orderId = req.params.orderId;
-  console.log('Fetching status for orderId:', orderId);
+// GET all products with category included
+app.get('/api/products', (req, res) => {
+  const sql = 'SELECT id, name, category, description, longDescription, price, image, status FROM products ORDER BY id DESC';
+  db.query(sql, (err, results) => {
+    if (err) return res.status(500).json({ error: err.message });
 
-  const sql = `
-    SELECT status, updated_at 
-    FROM order_tracking 
-    WHERE order_id = ?
-    ORDER BY updated_at ASC
-  `;
+    const updatedResults = results.map(product => {
+      if (!product.image) return { ...product, image: null };
 
-  db.query(sql, [orderId], (err, results) => {
-    if (err) {
-      console.error('Error fetching order status:', err);
-      return res.status(500).json({ message: 'Failed to fetch order status' });
-    }
-    console.log('Results:', results);
-    if (results.length === 0) {
-      // Instead of 404, send empty array for now to avoid frontend error
-      return res.json([]);
-    }
-    res.json(results);
-  });
-});
+      if (product.image.startsWith('http://') || product.image.startsWith('https://')) {
+        return { ...product };
+      }
 
-app.post('/place-order', (req, res) => {
-  const { title, price, description, image } = req.body;
-  const sql = `INSERT INTO orders (title, price, description, image) VALUES (?, ?, ?, ?)`;
-
-  db.query(sql, [title, price, description, image], (err) => {
-    if (err) return res.status(500).json({ message: "Failed to place order" });
-    res.status(200).json({ message: "Order placed successfully" });
-  });
-});
-
-app.post('/api/orders', (req, res) => {
-  const {
-    user_id, user_name, user_email, country, address,
-    product_title, product_price, product_quantity,
-    product_description, product_image,
-    payment_method, payment_status
-  } = req.body;
-
-  const sql = `
-    INSERT INTO orders (
-      user_id, user_name, user_email, country, address,
-      product_title, product_price, product_quantity,
-      product_description, product_image,
-      payment_method, payment_status, created_at
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
-  `;
-
-  db.query(sql, [
-    user_id, user_name, user_email, country, address,
-    product_title, parseFloat(product_price), product_quantity,
-    product_description, product_image,
-    payment_method, payment_status
-  ], (err, result) => {
-    if (err) return res.status(500).json({ message: 'Failed to place order.' });
-
-    const newOrderId = result.insertId;
-
-    const insertTracking = "INSERT INTO order_tracking (order_id, status, updated_at) VALUES (?, 'Pending', NOW())";
-    db.query(insertTracking, [newOrderId], (err2) => {
-      if (err2) console.error("⚠️ Failed to insert tracking info:", err2);
+      return {
+        ...product,
+        image: `http://localhost:5001/uploads/${product.image}`
+      };
     });
 
-    res.status(200).json({ message: '✅ Order placed successfully!', orderId: newOrderId });
+    res.json(updatedResults);
   });
 });
 
-app.get('/api/orders/:userId', (req, res) => {
-  const userId = req.params.userId;
+// POST add new product with category
+app.post('/api/products', (req, res) => {
+  const { name, category, description, longDescription, price, image, status } = req.body;
 
-  const sql = 'SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC';
-  db.query(sql, [userId], (err, results) => {
-    if (err) return res.status(500).json({ message: 'Failed to fetch user orders' });
-    if (results.length === 0) return res.status(404).json({ message: 'No orders found for this user' });
+  let imageToSave = image;
+  if (image && !(image.startsWith('http://') || image.startsWith('https://'))) {
+    // Extract filename if only filename or local path is sent
+    imageToSave = image.split('/').pop();
+  }
+
+  const sql = 'INSERT INTO products (name, category, description, longDescription, price, image, status) VALUES (?, ?, ?, ?, ?, ?, ?)';
+  db.query(sql, [name, category, description, longDescription, price, imageToSave, status || 'Available'], (err, result) => {
+    if (err) return res.status(500).json({ error: err.message });
+
+    res.json({
+      id: result.insertId,
+      name,
+      category,
+      description,
+      longDescription,
+      price,
+      image: imageToSave.startsWith('http') ? imageToSave : `http://localhost:5001/uploads/${imageToSave}`,
+      status: status || 'Available'
+    });
+  });
+});
+
+// PUT update product with category
+app.put('/api/products/:id', (req, res) => {
+  const { name, category, description, longDescription, price, image, status } = req.body;
+  const productId = req.params.id;
+
+  let imageToSave = image;
+  if (image && !(image.startsWith('http://') || image.startsWith('https://'))) {
+    imageToSave = image.split('/').pop();
+  }
+
+  const sql = `
+    UPDATE products
+    SET name = ?, category = ?, description = ?, longDescription = ?, price = ?, image = COALESCE(?, image), status = ?
+    WHERE id = ?
+  `;
+
+  db.query(sql, [name, category, description, longDescription, price, imageToSave, status, productId], (err) => {
+    if (err) {
+      console.error('Error updating product:', err);
+      return res.status(500).json({ error: err.message });
+    }
+
+    // Return updated product
+    const selectSql = 'SELECT * FROM products WHERE id = ?';
+    db.query(selectSql, [productId], (err2, results) => {
+      if (err2) {
+        console.error('Error fetching updated product:', err2);
+        return res.status(500).json({ error: err2.message });
+      }
+      if (results.length === 0) {
+        return res.status(404).json({ message: 'Product not found after update' });
+      }
+
+      const updatedProduct = results[0];
+
+      if (!updatedProduct.image) {
+        updatedProduct.image = null;
+      } else if (!(updatedProduct.image.startsWith('http://') || updatedProduct.image.startsWith('https://'))) {
+        updatedProduct.image = `http://localhost:5001/uploads/${updatedProduct.image}`;
+      }
+
+      res.json(updatedProduct);
+    });
+  });
+});
+
+// DELETE product
+app.delete('/api/products/:id', (req, res) => {
+  const productId = req.params.id;
+  const sql = 'DELETE FROM products WHERE id = ?';
+
+  db.query(sql, [productId], (err, result) => {
+    if (err) {
+      console.error('Error deleting product:', err);
+      return res.status(500).json({ error: err.message });
+    }
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+    res.json({ message: 'Product deleted successfully' });
+  });
+});
+
+/* ----------- USERS ----------- */
+
+// GET all users
+app.get('/api/users', (req, res) => {
+  const sql = `
+    SELECT 
+      uid AS id, 
+      name, 
+      email, 
+      created_at AS joined,
+      photo,
+      provider
+    FROM users
+    ORDER BY created_at DESC
+  `;
+
+  db.query(sql, (err, results) => {
+    if (err) {
+      console.error('Error fetching users:', err);
+      return res.status(500).json({ error: err.message });
+    }
     res.json(results);
   });
 });
-
-app.get('/api/user-orders-tracking/:userId', (req, res) => {
-  const userId = req.params.userId;
-
-  const sql = `
-    SELECT o.id AS order_id, o.product_title, t.status, t.updated_at
-    FROM orders o
-    LEFT JOIN order_tracking t ON o.id = t.order_id
-    WHERE o.user_id = ?
-    ORDER BY t.updated_at DESC
-  `;
-
-  db.query(sql, [userId], (err, results) => {
-    if (err) return res.status(500).json({ message: 'Failed to fetch tracking info' });
-    if (results.length === 0) return res.status(404).json({ message: 'No tracking info found' });
-    res.json(results);
-  });
-});
-
-app.post('/api/checkout', (req, res) => {
-  const {
-    userName, userEmail, country, address,
-    productTitle, productPrice, productQuantity,
-    productDescription, productImage,
-    paymentMethod, paymentStatus
-  } = req.body;
-
-  const sql = `
-    INSERT INTO orders (
-      user_name, user_email, country, address,
-      product_title, product_price, product_quantity,
-      product_description, product_image,
-      payment_method, payment_status, created_at
-    )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
-  `;
-
-  db.query(sql, [
-    userName, userEmail, country, address,
-    productTitle, productPrice, productQuantity,
-    productDescription, productImage,
-    paymentMethod, paymentStatus
-  ], (err) => {
-    if (err) return res.status(500).send("Failed to complete checkout.");
-    res.status(200).send("Checkout successful.");
-  });
-});
-
-// --- REVIEWS ---
-
+// Express route example - get payments of logged-in user (or all payments)
 app.get('/api/reviews', (req, res) => {
   const sql = `
     SELECT 
@@ -340,27 +274,174 @@ app.get('/api/reviews', (req, res) => {
   });
 });
 
-app.post('/api/reviews', (req, res) => {
-  const { name, rating, comment } = req.body;
-  if (!name || !rating || !comment) {
-    return res.status(400).json({ error: 'Missing fields' });
+app.put('/api/reviews/:id/reply', (req, res) => {
+  const reviewId = parseInt(req.params.id);
+  const { reply } = req.body;
+
+  if (!reply || reply.trim() === '') {
+    return res.status(400).json({ error: 'Reply text is required' });
   }
 
-  db.query(
-    'INSERT INTO reviews (name, rating, comment) VALUES (?, ?, ?)',
-    [name, rating, comment],
-    (err, result) => {
-      if (err) return res.status(500).json({ error: err.message });
-      db.query('SELECT * FROM reviews WHERE id = ?', [result.insertId], (err2, newReview) => {
-        if (err2) return res.status(500).json({ error: err2.message });
-        res.json(newReview[0]);
-      });
+  db.query('SELECT * FROM reviews WHERE id = ?', [reviewId], (err, results) => {
+    if (err) return res.status(500).json({ error: err.message });
+
+    if (results.length === 0) {
+      return res.status(404).json({ error: 'Review not found' });
     }
-  );
+
+    db.query(
+      'UPDATE reviews SET reply = ?, status = ? WHERE id = ?',
+      [reply, 'Responded', reviewId],
+      (err2) => {
+        if (err2) return res.status(500).json({ error: err2.message });
+        res.json({ message: 'Reply saved successfully' });
+      }
+    );
+  });
+});
+// Total revenue with monthly change %
+app.get('/api/overview/revenue', (req, res) => {
+  const sqlTotal = `SELECT SUM(product_price * product_quantity) AS totalRevenue FROM orders`;
+  const sqlLastMonth = `SELECT SUM(product_price * product_quantity) AS lastMonthRevenue FROM orders WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND created_at < CURDATE()`;
+
+  db.query(sqlTotal, (err, totalResult) => {
+    if (err) return res.status(500).json({ error: err.message });
+
+    db.query(sqlLastMonth, (err2, lastMonthResult) => {
+      if (err2) return res.status(500).json({ error: err2.message });
+
+      const totalRevenue = totalResult[0].totalRevenue || 0;
+      const lastMonthRevenue = lastMonthResult[0].lastMonthRevenue || 0;
+      const revenueChangePercent = lastMonthRevenue === 0 ? 0 : (((totalRevenue - lastMonthRevenue) / lastMonthRevenue) * 100).toFixed(2);
+
+      res.json({ totalRevenue, revenueChangePercent });
+    });
+  });
 });
 
-// --- Start Server ---
-const PORT = 5000;
+// Total orders with monthly change %
+app.get('/api/overview/orders', (req, res) => {
+  const sqlTotal = `SELECT COUNT(*) AS totalOrders FROM orders`;
+  const sqlLastMonth = `SELECT COUNT(*) AS lastMonthOrders FROM orders WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND created_at < CURDATE()`;
+
+  db.query(sqlTotal, (err, totalResult) => {
+    if (err) return res.status(500).json({ error: err.message });
+
+    db.query(sqlLastMonth, (err2, lastMonthResult) => {
+      if (err2) return res.status(500).json({ error: err2.message });
+
+      const totalOrders = totalResult[0].totalOrders || 0;
+      const lastMonthOrders = lastMonthResult[0].lastMonthOrders || 0;
+      const ordersChangePercent = lastMonthOrders === 0 ? 0 : (((totalOrders - lastMonthOrders) / lastMonthOrders) * 100).toFixed(2);
+
+      res.json({ totalOrders, ordersChangePercent });
+    });
+  });
+});
+
+// Active users (distinct user emails in last 30 days) with change %
+app.get('/api/overview/users', (req, res) => {
+  const sqlActiveUsers = `SELECT COUNT(DISTINCT user_email) AS activeUsers FROM orders WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)`;
+  const sqlPrevPeriod = `SELECT COUNT(DISTINCT user_email) AS prevActiveUsers FROM orders WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 60 DAY) AND created_at < DATE_SUB(CURDATE(), INTERVAL 30 DAY)`;
+
+  db.query(sqlActiveUsers, (err, currentResult) => {
+    if (err) return res.status(500).json({ error: err.message });
+
+    db.query(sqlPrevPeriod, (err2, prevResult) => {
+      if (err2) return res.status(500).json({ error: err2.message });
+
+      const activeUsers = currentResult[0].activeUsers || 0;
+      const prevActiveUsers = prevResult[0].prevActiveUsers || 0;
+      const usersChangePercent = prevActiveUsers === 0 ? 0 : (((activeUsers - prevActiveUsers) / prevActiveUsers) * 100).toFixed(2);
+
+      res.json({ activeUsers, usersChangePercent });
+    });
+  });
+});
+
+// Pending orders with monthly change %
+app.get('/api/overview/pending-orders', (req, res) => {
+  const sqlPending = `SELECT COUNT(*) AS count FROM orders WHERE tracking_status = 'Pending'`;
+  const sqlPrevPending = `SELECT COUNT(*) AS prevCount FROM orders WHERE tracking_status = 'Pending' AND created_at >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND created_at < CURDATE()`;
+
+  db.query(sqlPending, (err, pendingResult) => {
+    if (err) return res.status(500).json({ error: err.message });
+
+    db.query(sqlPrevPending, (err2, prevResult) => {
+      if (err2) return res.status(500).json({ error: err2.message });
+
+      const count = pendingResult[0].count || 0;
+      const prevCount = prevResult[0].prevCount || 0;
+      const changePercent = prevCount === 0 ? 0 : (((count - prevCount) / prevCount) * 100).toFixed(2);
+
+      res.json({ count, changePercent });
+    });
+  });
+});
+app.get('/api/overview/monthly-revenue', (req, res) => {
+  const sql = `
+    SELECT
+      MONTH(created_at) AS month,
+      IFNULL(SUM(product_price * product_quantity), 0) AS revenue
+    FROM orders
+    GROUP BY MONTH(created_at)
+    ORDER BY MONTH(created_at)
+  `;
+
+  db.query(sql, (err, results) => {
+    if (err) {
+      console.error('Error fetching monthly revenue:', err);
+      return res.status(500).json({ error: err.message });
+    }
+    res.json(results);
+  });
+});
+// Assuming you have a users table with columns like id, name, username, email, phone, address, website, bio, profile_image
+
+// GET user profile by ID (or email)
+app.get('/api/users/:id', (req, res) => {
+  const userId = req.params.id;
+  db.query('SELECT * FROM users WHERE id = ?', [userId], (err, results) => {
+    if (err) return res.status(500).json({ error: err.message });
+    if (results.length === 0) return res.status(404).json({ error: 'User not found' });
+    res.json(results[0]);
+  });
+});
+
+// UPDATE user profile
+app.put('/api/users/:id', upload.single('profileImage'), (req, res) => {
+  const userId = req.params.id;
+  const {
+    name,
+    username,
+    email,
+    phone,
+    address,
+    website,
+    bio,
+  } = req.body;
+
+  // The uploaded file info is in req.file
+  let profileImage = null;
+  if (req.file) {
+    profileImage = req.file.filename; // or build full URL like `/uploads/${req.file.filename}`
+  }
+
+  // Update user in DB; if new image uploaded, update profile_image column
+  const sql = `
+    UPDATE users SET
+      name = ?, username = ?, email = ?, phone = ?, address = ?, website = ?, bio = ?, profile_image = COALESCE(?, profile_image)
+    WHERE id = ?
+  `;
+
+  db.query(sql, [name, username, email, phone, address, website, bio, profileImage, userId], (err, result) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json({ message: 'Profile updated successfully', profileImage });
+  });
+});
+
+/* ------------------- SERVER ------------------- */
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
