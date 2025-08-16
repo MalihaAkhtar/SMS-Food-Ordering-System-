@@ -1,0 +1,235 @@
+/* Authpage */
+/* Reset & Base */
+body {
+  background-color: black;
+}
+* {
+  box-sizing: border-box;
+}
+
+body, html, .App {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #1a1a1a;
+   height: 100%;
+}
+
+
+
+/* Left Panel */
+.left-panel {
+  flex: 1;
+  height: 100%;
+  position: relative;
+}
+
+.left-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Overlay */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.overlay h2 {
+  font-size: 36px;
+  margin-bottom: 2px;
+}
+
+.overlay p {
+  font-size: 18px;
+  margin-bottom: 25px;
+  max-width: 400px;
+}
+
+.overlay .signin {
+  background-color: #f4b400;
+  border: none;
+  color: white;
+  padding: 14px 50px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.overlay .signin:hover {
+  background-color: #dca200;
+}
+
+/* Right Panel */
+.right-panel1 {
+  flex: 1;
+  height: 100%;
+  padding: 30px 60px 30px 60px;
+  display: flex;
+  justify-content: center; /* center horizontally */
+  align-items: center;     /* center vertically */
+  background-color: rgb(28, 27, 27);
+ 
+}
+
+
+
+.form-box {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Title */
+.form-header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.form-header h1 {
+  font-size: 30px;
+  color: #f4b400;
+  margin-top: 0;
+}
+
+/* Social Login Buttons */
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px; /* spacing below social buttons */
+  margin-top: 15px;
+}
+
+.social-buttons button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+   background-color: white;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  cursor: pointer;
+  color: black;
+}
+.social-buttons button:hover {
+  background-color: #f0f0f0; /* 👈 Add subtle hover */
+  color: black;              /* 👈 Prevent red on hover */
+  border-color: #aaa;        /* Optional: better hover feel */
+}
+.social-buttons i {
+  color: black !important;
+}
+
+/* OR Divider */
+.or-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #f3f1f1;
+  margin: 10px 0; /* spacing above and below OR */
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.or-divider::before,
+.or-divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #ccc;
+}
+
+.or-divider::before {
+  margin-right: 10px;
+}
+
+.or-divider::after {
+  margin-left: 10px;
+}
+
+/* Input Fields */
+.input-wrapper {
+  margin: 12px 0; /* more spacing */
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+ 
+}
+
+.input-container input {
+  width: 100%;
+  padding: 12px 40px 12px 40px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  background-color: #f6fafa;
+  outline: none;
+}
+
+/* Icons */
+.input-icon {
+  position: absolute;
+  left: 12px;
+  width: 20px;
+  height: 20px;
+}
+
+.toggle-icon {
+  position: absolute;
+  right: 12px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+/* Submit Button */
+.right-panel1 .signin {
+  background-color: #f4b400;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  max-width: 170px;
+  margin-top: 10px; /* spacing above button */
+  margin-bottom: 10px; /* spacing below button */
+  transition: background 0.3s;
+  
+}
+
+.right-panel1 .signin:hover {
+  background-color: #dca200;
+}
+
+/* Create Account link */
+.create-account {
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+  margin-top: 6px;
+}

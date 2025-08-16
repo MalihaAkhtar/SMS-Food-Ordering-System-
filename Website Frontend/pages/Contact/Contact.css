@@ -1,0 +1,174 @@
+.contact-container {
+  font-family: Arial, sans-serif;
+  background-color: #000;
+  color: #D9D9D9;
+  padding: 40px 20px;
+}
+
+.get-in-touch {
+  text-align: center;
+  max-width: 800px;
+  margin: auto;
+}
+
+.get-in-touch h5 {
+  font-style: italic;
+  color: #D9D9D9;
+  margin-bottom: 10px;
+}
+
+.get-in-touch h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #F3D382;
+}
+
+.get-in-touch p {
+  line-height: 1.6;
+  font-size: 14px;
+  color: #D9D9D9;
+}
+
+.social-icons {
+  margin-top: 15px;
+}
+
+.social-icons i {
+  margin: 0 10px;
+  color: #F5BE32;
+  font-size: 18px;
+  cursor: pointer;
+}
+.info-box p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #D9D9D9; /* Default number color */
+}
+
+.info-box p .label {
+  color: #F3D382; /* Yellow color for "Enquiry:" and "Booking:" */
+  font-weight: bold;
+}
+
+.info-box p .number {
+  color: #D9D9D9; /* White color for phone numbers */
+}
+
+
+.contact-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 40px auto;
+  max-width: 1000px;
+  gap: 20px;
+}
+
+.info-box {
+  flex: 1 1 200px;
+  background: #111;
+  border: 1px solid #333;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.05);
+  color: #D9D9D9;
+}
+
+.info-box i {
+  font-size: 24px;
+  color: #F5BE32;
+  margin-bottom: 10px;
+}
+
+.info-box h4 {
+  margin-bottom: 10px;
+  color: #F5BE32;
+}
+
+.question-form {
+  text-align: center;
+  max-width: 800px;
+  margin: auto;
+}
+
+.question-form h2 {
+  margin-bottom: 10px;
+  color: #F3D382;
+}
+
+.question-form h4 {
+  font-style: italic;
+  color: #D9D9D9;
+  margin-bottom: 30px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+form input,
+form textarea {
+  background-color: #111;
+  color: #fff;
+  border: 1px solid #444;
+  padding: 10px;
+  flex: 1;
+  font-size: 14px;
+}
+
+form input::placeholder,
+form textarea::placeholder {
+  color: #D9D9D9;
+}
+
+form textarea {
+  height: 120px;
+  resize: none;
+}
+
+form button {
+  align-self: center;
+  padding: 10px 20px;
+  background-color: #F5BE32;
+  color: #000;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+form button:hover {
+  background-color: #F3D382;
+}
+.inline-info {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  flex-wrap: wrap;
+  color: #D9D9D9;
+  font-size: 14px;
+}
+
+.inline-info span {
+  display: inline-flex;  /* Make each span inline-flex to align label & value */
+  gap: 2px;              /* thoda gap label aur email ke beech */
+  align-items: center;   /* vertical center alignment */
+}
+
+.inline-info span strong {
+  color: #F3D382;
+}
+
+
+.map-section {
+  margin-top: 40px;
+  border: 4px solid #F5BE32;
+}

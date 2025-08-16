@@ -1,0 +1,152 @@
+/* Overall card layout */
+.order-card {
+  display: flex;
+  background-color: #1a1a1a;
+  color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s;
+}
+
+.order-card:hover {
+  transform: scale(1.01);
+}
+
+/* Left side image */
+.card-left {
+  width: 150px;
+  flex-shrink: 0;
+  padding-left: 20px;
+}
+
+.order-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Right side details */
+.card-right {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.order-header,
+.order-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-items {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #F3D382 !important;
+}
+
+/* Status badge */
+.status {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  text-transform: capitalize;
+  color: #D9D9D9;
+  margin-top: 8px;
+}
+
+.status.delivered {
+  background-color: #4caf50;
+}
+
+.status.preparing {
+  background-color: #ff9800;
+}
+
+.status.out-for-delivery {
+  background-color: #2196f3;
+}
+
+.status.pending {
+  background-color: #757575;
+}
+
+/* Delivery message */
+.delivery-message {
+  margin-top: 10px;
+  color: #ccc;
+  font-style: italic;
+}
+
+/* Track button */
+.order-track-btn {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #fff;
+  color: #000;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.order-track-btn:hover {
+  background-color: #ff9800;
+  color: #fff;
+}
+
+/* Tracking section */
+.order-tracking-details {
+  margin-top: 15px;
+  background-color: #2c2c2c;
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+
+.order-tracking-details h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.order-tracking-details ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.order-tracking-details li {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #ddd;
+}
+
+/* Global dark theme */
+body {
+  background-color: #000;
+}
+
+/* My Orders Section */
+.my-orders {
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: #000;
+  color: #fff;
+  min-height: 100vh;
+}
+
+.my-orders h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
