@@ -1,0 +1,210 @@
+.payments-page {
+  padding: 24px;
+  margin-left: 260px;
+  background-color: #0d0d0d;
+  color: white;
+  min-height: 100vh;
+  overflow-x: auto;
+}
+
+.payments-page h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.payments-page p {
+  color: #aaa;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.payments-filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.payments-filters input {
+  background-color: #1a1a1a;
+  color: white;
+  border: 1px solid #333;
+  padding: 8px 12px;  /* normal padding */
+  border-radius: 6px;
+  outline: none;
+  flex: 1;
+  min-width: 200px;
+  appearance: none; /* keep default for inputs */
+}
+
+.payments-filters select {
+  background-color: #1a1a1a;
+  color: white;
+  border: 1px solid #333;
+  padding: 8px 12px;
+  padding-right: 36px;  /* extra right padding for arrow */
+  border-radius: 6px;
+  outline: none;
+  flex: 1;
+  min-width: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 25px;
+  max-width: 200px;
+}
+
+
+.payments-filters input:focus,
+.payments-filters select:focus {
+  border-color: #555;
+}
+
+.payments-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.payments-table thead {
+  background-color: #374151;
+  font-weight: bold;
+}
+
+.payments-table th,
+.payments-table td {
+  text-align: left;
+  padding: 14px;
+  border-bottom: 1px solid #2a2a2a;
+  white-space: nowrap;
+  vertical-align: middle;
+  color: #d4d4d4;
+  font-size: 14px;
+}
+
+.payments-table tbody tr:hover {
+  background-color: #374151;
+}
+
+/* Column width setup */
+.payments-table th:nth-child(1),
+.payments-table td:nth-child(1),
+.payments-table th:nth-child(2),
+.payments-table td:nth-child(2),
+.payments-table th:nth-child(3),
+.payments-table td:nth-child(3) {
+  min-width: 140px;
+}
+
+.payments-table th:nth-child(4),
+.payments-table td:nth-child(4),
+.payments-table th:nth-child(5),
+.payments-table td:nth-child(5) {
+  min-width: 100px;
+}
+
+.payments-table th:nth-child(6),
+.payments-table td:nth-child(6),
+.payments-table th:nth-child(7),
+.payments-table td:nth-child(7) {
+  min-width: 120px;
+}
+
+.payments-table th:nth-child(8),
+.payments-table td:nth-child(8) {
+  min-width: 80px;
+  text-align: center;
+}
+
+.dots-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+}
+.dots-btn::before,
+.dots-btn::after {
+  content: none !important;
+}
+.dropdown::after {
+  display: none !important;
+}
+
+
+.status {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  display: inline-block;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status.pending {
+  color: #d97706;
+  background-color: rgba(217, 119, 6, 0.1);
+}
+
+.status.completed {
+  color: #22c55e;
+  background-color: rgba(34, 197, 94, 0.1);
+}
+
+.status.failed {
+  color: #ef4444;
+  background-color: rgba(239, 68, 68, 0.2);
+}
+
+/* Modal styles (unchanged but matches product design) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-box {
+  background: #1c1b1b;
+  color: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-box h2 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.modal-box button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: rgb(218, 40, 40);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

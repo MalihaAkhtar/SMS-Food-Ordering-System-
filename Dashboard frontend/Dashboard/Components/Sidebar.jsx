@@ -1,0 +1,48 @@
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import logo from '../../assets/Logo 1.png';
+import {
+  LayoutDashboard,
+  Package,
+  ShoppingCart,
+  Users,
+  CreditCard,
+  MessageCircle,
+} from 'lucide-react';
+
+import './Sidebar.css';  // Import the CSS file
+
+const Sidebar = () => {
+  const menu = [
+    { name: 'Dashboard', path: '/dashboard', icon: <LayoutDashboard size={20} /> },
+   { name: 'Products', path: '/dashboard/product', icon: <Package size={20} /> },
+    { name: 'Orders', path: '/dashboard/orders', icon: <ShoppingCart size={20} /> },
+    { name: 'Users', path: '/dashboard/users', icon: <Users size={20} /> },
+    { name: 'Payments', path: '/dashboard/payments', icon: <CreditCard size={20} /> },
+    { name: 'Feedback', path: '/dashboard/feedback', icon: <MessageCircle size={20} /> },
+  ];
+
+  return (
+    <aside className="sidebar">
+       <div className="logo4">
+      <img src={logo} alt="SMS Logo" className="logo-image4" />
+    </div>
+      <ul>
+        {menu.map((item) => (
+          <li key={item.name}>
+            <NavLink
+              to={item.path}
+              className={({ isActive }) => (isActive ? 'active' : '')}
+            >
+              <span>{item.icon}</span>
+              <span>{item.name}</span>
+            </NavLink>
+          </li>
+        ))}
+      </ul>
+      <footer>© 2025 FoodAdmin</footer>
+    </aside>
+  );
+};
+
+export default Sidebar;

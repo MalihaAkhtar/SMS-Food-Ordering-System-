@@ -1,0 +1,45 @@
+/* Overview.css */
+
+.overview-container {
+  margin-left: 260px; /* match sidebar width */
+  padding: 24px;
+  background-color: #0d0d0d;
+  min-height: 100vh;
+  color: #fff;
+}
+
+.overview-header h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+  color:#F3D382 /* Very small space instead of 0 or too large */
+}
+
+.overview-header p {
+  color: #D9D9D9 !important;
+  margin-bottom: 24px; /* Keep bottom space consistent */
+  margin-top: 0; /* Ensure there's no top margin causing gap */
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+ 
+}
+.stats-grid title {
+  color:#F3D382;
+}
+.charts-section {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+  
+}
+
+@media (max-width: 1024px) {
+  .charts-section {
+    grid-template-columns: 1fr;
+  }
+}

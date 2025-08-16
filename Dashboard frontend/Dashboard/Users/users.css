@@ -1,0 +1,173 @@
+/* Reset headings and paragraphs */
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+  padding: 0;
+}
+
+/* Wrapper to allow dropdown overflow */
+.table-wrapper {
+  position: relative;
+  overflow: visible !important; /* Force visible overflow */
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Page wrapper */
+.User-page {
+  margin-left: 260px;
+  padding: 24px;
+  background-color: #0d0d0d;
+  color: white;
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow: visible !important; /* Make sure dropdown not clipped */
+  position: relative;
+}
+
+/* Header section */
+.User-header {
+  margin-bottom: 20px;
+}
+
+.User-header h2 {
+  font-size: 28px;
+}
+
+.User-header p {
+  color: #a1a1aa;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+/* Status badges */
+.status {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status.active {
+  background-color: #22c55e33;
+  color: #22c55e;
+}
+
+.status.blocked {
+  background-color: #ef444433;
+  color: #ef4444;
+}
+
+/* Filter styles */
+.filter-container {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.filter-input,
+.filter-select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background-color: #1f1f1f;
+  color: #d1d1d1;
+  font-size: 14px;
+}
+
+.filter-input {
+  flex: 1;
+}
+
+.filter-input::placeholder {
+  color: #777;
+}
+
+.filter-select {
+  cursor: pointer;
+}
+
+/* Table styles */
+.table {
+  min-width: 900px;
+  border-collapse: collapse;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  overflow: visible !important; /* Make dropdown visible */
+  background-color: #121212;
+  position: relative; /* Important for absolute dropdown */
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 2.2fr 1.7fr 2.5fr 1.2fr 1fr 0.8fr;
+  column-gap: 16px;
+  padding: 16px;
+  background-color: #374151;
+  font-weight: bold;
+  color: #e4e4e4;
+  border-bottom: 1px solid #2a2a2a;
+  align-items: center;
+  justify-items: center;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 2.2fr 1.7fr 2.5fr 1.2fr 1fr 0.8fr;
+  column-gap: 16px;
+  padding: 16px;
+  align-items: center;
+  border-bottom: 1px solid #2a2a2a;
+  color: #d1d1d1;
+  transition: background-color 0.2s ease;
+  justify-items: center;
+  overflow: visible !important; /* Prevent clipping */
+  position: relative; /* For dropdown absolute positioning */
+}
+
+.table-row:hover {
+  background-color: #374151;
+}
+
+/* Action cell & dropdown */
+.action-cell {
+  position: relative;
+  overflow: visible !important;
+}
+
+.dots-btn {
+  background: transparent;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+}
+
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: 28px;
+  background-color: #1f1f1f;
+  border: 1px solid #2a2a2a;
+  padding: 8px 0;
+  border-radius: 8px;
+  z-index: 9999; /* High so it’s always on top */
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.dropdown button {
+  background: none;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.dropdown button:hover {
+  background-color: #333;
+}

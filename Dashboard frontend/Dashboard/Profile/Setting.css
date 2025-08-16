@@ -1,0 +1,94 @@
+/* Setting.css */
+
+:root {
+  --color-bg: #121212;
+  --color-bg-secondary: #1e1e1e;
+  --color-text-primary: #f0f0f0;
+  --color-text-secondary: #a0a0a0;
+  --color-border: #333;
+  --color-accent: #4caf50; /* green accent */
+  --color-accent-hover: #43a047;
+}
+/* Global dark background for entire page */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  background-color: #121212; /* Dark background */
+  color: #f0f0f0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.settings-container {
+  background-color: var(--color-bg-secondary);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 480px;
+  margin: 2rem auto;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
+  color: var(--color-text-primary);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-height: 100vh;
+}
+
+.settings-container h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 0.3rem;
+}
+
+.settings-container p {
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+  margin-bottom: 1.8rem;
+  line-height: 1.5;
+}
+
+.settings-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.settings-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+  color: var(--color-text-primary);
+}
+
+.settings-select {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  background-color: var(--color-bg);
+  border: 1.5px solid var(--color-border);
+  color: var(--color-text-primary);
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  cursor: pointer;
+  outline-offset: 2px;
+}
+
+.settings-select:hover,
+.settings-select:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 6px var(--color-accent);
+}
+
+.settings-select option {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+}
+
+/* Responsive */
+@media (max-width: 520px) {
+  .settings-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .settings-container h2 {
+    font-size: 1.6rem;
+  }
+}
